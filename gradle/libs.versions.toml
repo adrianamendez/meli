@@ -1,0 +1,25 @@
+[versions]
+kotlin = "1.8.10"
+androidGradlePlugin = "7.4.1"
+googleDaggerHiltAndroid = "2.43.2"
+ksp = "1.8.10-1.0.9"
+jvm = "1.8.10"
+googleServices = "4.3.15"
+kotlinter = "3.13.0"
+databinding = "3.1.4"
+
+[libraries]
+
+databinding = {module = "com.android.databinding:compiler", version.ref = "databinding"}
+
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
+android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+hilt-gradle = { id = "com.google.dagger.hilt.android", version.ref = "googleDaggerHiltAndroid" }
+jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jvm" }
+kotlinter = { id = "org.jmailen.kotlinter", version.ref = "kotlinter"}
+google-services = { id = "com.google.gms.google-services", version.ref = "googleServices" }
