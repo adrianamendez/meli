@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.hilt.gradle)
     alias(libs.plugins.kotlinter)
 }
 
@@ -52,7 +53,8 @@ android {
 
 dependencies {
     kapt(libs.databinding)
-
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
     implementation("androidx.core:core-ktx:1.7.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.5.0")
