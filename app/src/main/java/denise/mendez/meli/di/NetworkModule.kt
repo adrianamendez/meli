@@ -1,4 +1,4 @@
-package denise.mendez.data.di
+package denise.mendez.meli.di
 
 import android.app.Application
 import android.content.Context
@@ -11,7 +11,9 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import denise.mendez.data.network.ApiResponseCallAdapterFactory
 import denise.mendez.data.network.BASE_URL
+import denise.mendez.data.remote.apis.MeliApi
 import denise.mendez.data.storage.DataStorage
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -57,6 +59,7 @@ class NetworkModule {
     fun provideRetrofit(client: OkHttpClient, moshi: Moshi): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
+            .addCallAdapterFactory(ApiResponseCallAdapterFactory.create())
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .client(client)
             .build()
@@ -127,12 +130,12 @@ class NetworkModule {
     }
 
     // TODO VALIDATE CACHE
-/*
+
     @Provides
     @Singleton
-    fun providesCategories(
+    fun providesMeli(
         retrofit: Retrofit
-    ): CategoriesApi = retrofit.create(CategoriesApi::class.java)
+    ): MeliApi = retrofit.create(MeliApi::class.java)
 
-*/
+
 }

@@ -22,9 +22,6 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
-    kapt {
-        generateStubs = true
-    }
 
     buildTypes {
 
@@ -45,22 +42,28 @@ android {
         jvmTarget = "11"
     }
 
-    buildFeatures {
-        dataBinding =  true
-        viewBinding = true
-    }
 }
 
 dependencies {
-    kapt(libs.databinding)
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
-    implementation("androidx.core:core-ktx:1.7.0")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.5.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    implementation("androidx.navigation:navigation-fragment-ktx:2.5.3")
-    implementation("androidx.navigation:navigation-ui-ktx:2.5.3")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    implementation(projects.data)
+    implementation(projects.domain)
+    implementation(libs.moshi.converter)
+    implementation(libs.moshi.codegen)
+    implementation(libs.moshi.adapters)
+    implementation(libs.moshi.kotlin)
+    implementation(libs.okhttp.okhttp)
+    implementation(libs.okhttp.urlconnection)
+    implementation(libs.okhttp.interceptor)
+    implementation(libs.okhttp.tls)
+    implementation(libs.moshi.converter.factory)
+    implementation(libs.retrofit2)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.constraintlayout)
+
+}
+
+kapt {
+    correctErrorTypes = true
 }

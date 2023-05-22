@@ -3,7 +3,6 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlinter)
-    alias(libs.plugins.hilt.gradle)
     alias(libs.plugins.kotlin.kapt)
 }
 
@@ -58,14 +57,7 @@ dependencies {
     implementation(libs.okhttp.tls)
     implementation(libs.moshi.converter.factory)
     implementation(libs.retrofit2)
-
     implementation(libs.hilt.android)
-    kapt(libs.hilt.compiler)
     implementation(libs.datastore.preferences)
-    implementation("androidx.core:core-ktx:1.7.0")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.9.0")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+
 }

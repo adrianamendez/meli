@@ -12,6 +12,8 @@ okhttp = "4.10.0"
 moshiFactory = "2.9.0"
 retrofit2 = "2.9.0"
 dataStorePreferences = "1.0.0"
+androidxAppCompat = "1.6.1"
+constraintLayout = "2.1.4"
 
 [libraries]
 
@@ -32,6 +34,8 @@ hilt-android-testing = { module = "com.google.dagger:hilt-android-testing", vers
 hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "googleDaggerHiltAndroid" }
 hilt-gradle-plugin = { module = "com.google.dagger:hilt-android-gradle-plugin", version.ref = "googleDaggerHiltAndroid" }
 datastore-preferences = {module = "androidx.datastore:datastore-preferences", version.ref = "dataStorePreferences"}
+androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "androidxAppCompat"}
+androidx-constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintLayout"}
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
