@@ -4,7 +4,6 @@ import com.squareup.moshi.Json
 import denise.mendez.domain.utils.EMPTY_INT
 import denise.mendez.domain.utils.EMPTY_STRING
 
-
 data class SellerDto(
     val id: Int? = EMPTY_INT,
     @Json(name = "power_seller_status")

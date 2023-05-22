@@ -4,7 +4,6 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import denise.mendez.domain.models.ProductDetails
 
-
 @JsonClass(generateAdapter = true)
 data class ProductDetailDto(
     val id: String,
@@ -12,7 +11,7 @@ data class ProductDetailDto(
     @field:Json(name = "category_id")
     val idCategory: String,
     val pictures: List<PictureDto>,
-    val permalink:String,
+    val permalink: String,
     val descriptionDto: ItemDescriptionDto
 ) {
 

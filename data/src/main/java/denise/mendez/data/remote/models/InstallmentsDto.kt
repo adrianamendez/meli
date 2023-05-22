@@ -5,7 +5,6 @@ import denise.mendez.domain.utils.EMPTY_DOUBLE
 import denise.mendez.domain.utils.EMPTY_INT
 import denise.mendez.domain.utils.EMPTY_STRING
 
-
 data class InstallmentsDto(
     val quantity: Int? = EMPTY_INT,
     val amount: Double? = EMPTY_DOUBLE,

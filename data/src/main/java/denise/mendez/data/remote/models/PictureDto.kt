@@ -1,9 +1,8 @@
 package denise.mendez.data.remote.models
 
-import denise.mendez.domain.models.Picture
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
-
+import denise.mendez.domain.models.Picture
 
 @JsonClass(generateAdapter = true)
 data class PictureDto(

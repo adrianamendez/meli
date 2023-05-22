@@ -2,7 +2,6 @@ package denise.mendez.data.remote.models
 
 import denise.mendez.domain.utils.EMPTY_STRING
 
-
 data class SellerAddressDto(
     val country: CountryDto? = CountryDto(),
     val state: StateDto? = StateDto(),

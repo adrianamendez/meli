@@ -4,7 +4,6 @@ import com.squareup.moshi.Json
 import denise.mendez.domain.utils.EMPTY_INT
 import denise.mendez.domain.utils.EMPTY_STRING
 
-
 data class AttributeDto(
     val name: String? = EMPTY_STRING,
     @Json(name = "value_id")

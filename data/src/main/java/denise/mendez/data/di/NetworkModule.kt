@@ -1,6 +1,5 @@
 package denise.mendez.data.di
 
-
 import android.app.Application
 import android.content.Context
 import android.net.ConnectivityManager
@@ -12,7 +11,6 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import denise.mendez.data.BuildConfig
 import denise.mendez.data.network.BASE_URL
 import denise.mendez.data.storage.DataStorage
 import okhttp3.Interceptor
@@ -64,7 +62,6 @@ class NetworkModule {
             .build()
     }
 
-
     @Provides
     @Singleton
     @Named("appContext")
@@ -102,7 +99,6 @@ class NetworkModule {
             )
 
         try {
-
             return httpBuilder
                 .protocols(mutableListOf(Protocol.HTTP_1_1))
                 .build()

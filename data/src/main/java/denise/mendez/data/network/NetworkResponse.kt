@@ -1,6 +1,5 @@
 package denise.mendez.data.network
 
-
 import okhttp3.Headers
 import java.io.IOException
 
@@ -30,6 +29,6 @@ sealed class NetworkResponse<out T : Any, out U : Any> {
     data class UnknownError(
         override val error: Throwable,
         val code: Int? = null,
-        val headers: Headers? = null,
+        val headers: Headers? = null
     ) : NetworkResponse<Nothing, Nothing>(), Error
 }

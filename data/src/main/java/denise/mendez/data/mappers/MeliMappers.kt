@@ -28,7 +28,6 @@ import denise.mendez.domain.utils.EMPTY_DOUBLE
 import denise.mendez.domain.utils.EMPTY_INT
 import denise.mendez.domain.utils.EMPTY_STRING
 
-
 object SearchResponseMapper {
     fun map(from: ProductSearchedDto) =
         ProductSearched(
@@ -171,4 +170,3 @@ object AttributeMapper {
             id = from.id ?: EMPTY_STRING
         )
 }
-

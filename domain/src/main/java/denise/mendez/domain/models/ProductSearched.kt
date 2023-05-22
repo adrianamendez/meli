@@ -4,5 +4,5 @@ data class ProductSearched(
     val siteId: String,
     val query: String,
     val paging: Paging,
-    val results: List<Result>
+    val results: List<Product>
 )

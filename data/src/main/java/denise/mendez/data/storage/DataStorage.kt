@@ -1,6 +1,5 @@
 package denise.mendez.data.storage
 
-
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.PreferenceDataStoreFactory
@@ -28,7 +27,6 @@ class DataStorage @Inject constructor(context: Context) {
                 INSTANCE ?: DataStorage(context.applicationContext).also { INSTANCE = it }
             }
         }
-
     }
 
     suspend fun saveToken(token: String) {
@@ -53,5 +51,4 @@ class DataStorage @Inject constructor(context: Context) {
         val tokenKey = stringPreferencesKey("auth_token")
         preferences[tokenKey]
     }
-
 }
