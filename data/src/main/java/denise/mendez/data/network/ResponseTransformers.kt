@@ -753,7 +753,7 @@ public fun <T> ApiResponse<List<T>>.merge(
  * @return An error message from the [ApiResponse.Failure].
  */
 public fun <T> ApiResponse.Failure<T>.message(): String {
-    // We Can keep Adding Specific Error Types if needed :D
+    // We Can keep Adding Specific Error Types if needed ;D
     return when (this) {
         is ApiResponse.Failure.Error -> "HTTP Error: "+ message()
         is ApiResponse.Failure.Exception -> {
