@@ -21,4 +21,3 @@ class ItemDescriptionDtoJsonAdapter {
         return map
     }
 }
-

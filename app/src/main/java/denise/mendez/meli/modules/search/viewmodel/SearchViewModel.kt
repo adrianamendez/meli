@@ -4,7 +4,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import denise.mendez.data.network.InternetAvailability
-import denise.mendez.data.network.MessageException
 import denise.mendez.data.network.NetworkStatus
 import denise.mendez.domain.ResourceState
 import denise.mendez.domain.usecases.SitesUseCase
@@ -17,10 +16,9 @@ import denise.mendez.meli.modules.search.entities.ProductItemModel
 import denise.mendez.meli.modules.search.view.SearchFragmentDirections
 import denise.mendez.meli.utils.NavigationToDirectionEvent
 import denise.mendez.meli.utils.asLiveData
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -29,7 +27,8 @@ private const val PAGE_SIZE = 50
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(
-    private val siteUseCase: SitesUseCase
+    private val siteUseCase: SitesUseCase,
+    private val dispatcher: CoroutineDispatcher
 ) : BaseViewModel() {
     private val _model = SingleLiveEvent<UiModel>()
     val model get() = _model.asLiveData()
@@ -47,9 +46,12 @@ class SearchViewModel @Inject constructor(
         UiModel.FeatureModel()
 
     fun init(defaultList: ProductEntityList?) {
-        job = viewModelScope.launch(Dispatchers.IO) {
-            if (InternetAvailability.check()) showEmptyOrList()
-            else showNoInternetUiModel()
+        job = viewModelScope.launch(dispatcher) {
+            if (InternetAvailability.check()) {
+                showEmptyOrList()
+            } else {
+                showNoInternetUiModel()
+            }
         }
 
         defaultList?.let { this.defaultList = it }
@@ -59,15 +61,15 @@ class SearchViewModel @Inject constructor(
         lastQuery = query
         showLoaderUiModel()
         if (::job.isInitialized) job.cancel()
-        if (query.isNotEmpty())
-            job = viewModelScope.launch(Dispatchers.IO) {
+        if (query.isNotEmpty()) {
+            job = viewModelScope.launch(dispatcher) {
                 siteUseCase.getProducts(
                     query,
                     PAGE_SIZE,
                     PAGE_SIZE
                 ).collect() { result ->
                     withContext(Dispatchers.Main) {
-                         when (result) {
+                        when (result) {
                             is ResourceState.Success -> {
                                 val searchedProductList = result.data
                                 if (searchedProductList.isNullOrEmpty()) {
@@ -75,16 +77,16 @@ class SearchViewModel @Inject constructor(
                                     _notFoundSearch.postValue(true)
                                 } else {
                                     _model.postValue(
-                                        SearchedProductItem(searchedProductList.map { productEntity ->
-                                            ProductItemModel.mapFromDomain(productEntity)
-                                        })
+                                        SearchedProductItem(
+                                            searchedProductList.map { productEntity ->
+                                                ProductItemModel.mapFromDomain(productEntity)
+                                            }
+                                        )
                                     )
                                     defaultList = ProductEntityList(searchedProductList)
                                 }
-
                             }
                             is ResourceState.Error -> {
-
                                 showError(result.message)
                                 showErrorUiModel()
                             }
@@ -93,42 +95,43 @@ class SearchViewModel @Inject constructor(
                                 showEmptyStateUiModel()
                             }
                         }
-
                     }
                 }
             }
-        else showEmptyStateUiModel()
+        } else {
+            showEmptyStateUiModel()
+        }
     }
 
-
     fun onItemSelected(item: ProductItemModel) {
-          _navigationEvent.value =
-              NavigationToDirectionEvent(
-                  SearchFragmentDirections.actionSearchFragmentToProductDetailFragment(item, defaultList)
-              )
+        _navigationEvent.value =
+            NavigationToDirectionEvent(
+                SearchFragmentDirections.actionSearchFragmentToProductDetailFragment(item, defaultList)
+            )
     }
 
     private fun lastSearchedList() {
         _model.postValue(
             defaultList.productEntity?.let {
-                SearchedProductItem(it.map { productEntity ->
-                    ProductItemModel.mapFromDomain(productEntity)
-                })
+                SearchedProductItem(
+                    it.map { productEntity ->
+                        ProductItemModel.mapFromDomain(productEntity)
+                    }
+                )
             }
         )
     }
 
     fun showHideInternetConnection(networkStatus: NetworkStatus) {
-        if (!firstDefaultInternetCall)
+        if (!firstDefaultInternetCall) {
             when (networkStatus) {
                 NetworkStatus.Available -> showEmptyOrList()
                 NetworkStatus.Unavailable -> showNoInternetUiModel()
             }
-        else {
+        } else {
             firstDefaultInternetCall = false
         }
     }
-
 
     private fun showEmptyOrList() {
         if (defaultList.productEntity?.isNotEmpty() == true) {

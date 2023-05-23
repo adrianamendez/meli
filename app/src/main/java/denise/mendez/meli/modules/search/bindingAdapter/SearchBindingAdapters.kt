@@ -13,8 +13,11 @@ import denise.mendez.meli.utils.hideKeyboard
 
 @BindingAdapter("uiLoading")
 fun View.uiLoading(uiState: UiModel?) {
-    visibility = if (uiState is UiModel.Loading) VISIBLE
-    else GONE
+    visibility = if (uiState is UiModel.Loading) {
+        VISIBLE
+    } else {
+        GONE
+    }
 }
 
 @BindingAdapter("uiErrorState")

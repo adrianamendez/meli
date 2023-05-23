@@ -36,7 +36,6 @@ abstract class BaseFragment<ViewModel : BaseViewModel>(layout: Int) :
      * Observer Events
      */
 
-
     protected fun <T : BaseViewModel> observerViewModelEvents(viewModel: T) {
         viewModel.navigationEvent.observe(viewLifecycleOwner, Observer(::navigateFragment))
     }

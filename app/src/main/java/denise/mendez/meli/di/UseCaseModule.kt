@@ -12,7 +12,6 @@ import denise.mendez.domain.usecases.SitesUseCase
 import denise.mendez.domain.usecases.SitesUseCaseImpl
 import javax.inject.Singleton
 
-
 @Module
 @InstallIn(SingletonComponent::class)
 object UseCasesModule {

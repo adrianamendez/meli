@@ -1,6 +1,5 @@
 package denise.mendez.data.repository
 
-import android.util.Log
 import denise.mendez.data.mappers.SuccessItemDescriptionMapper
 import denise.mendez.data.mappers.SuccessItemProductDetailMapper
 import denise.mendez.data.network.map
@@ -31,13 +30,12 @@ class ItemsRepositoryImpl(private val meliApi: MeliApi, private val logger: Logg
             val itemDescription = map(SuccessItemDescriptionMapper)
             if (itemDescription == null) {
                 emit(ResourceState.Error(message = "An error occurred while mapping SuccessItemDescriptionMapper"))
-                logger.d(REPOSITORY_ITEMS,"An error occurred while mapping SuccessItemDescriptionMapper returns Null")
+                logger.d(REPOSITORY_ITEMS, "An error occurred while mapping SuccessItemDescriptionMapper returns Null")
             } else {
                 emit(ResourceState.Success(itemDescription))
                 logger.d(REPOSITORY_ITEMS, "Success")
             }
         }.suspendOnFailure {
-
             emit(ResourceState.Error(message = message()))
             logger.d(REPOSITORY_ITEMS, message())
         }
@@ -60,16 +58,13 @@ class ItemsRepositoryImpl(private val meliApi: MeliApi, private val logger: Logg
         }
     }.flowOn(Dispatchers.Default)
 
-
     override suspend fun getItemProductDetailWithDescription(idProduct: String): Flow<ResourceState<ProductDetails>> =
         getItemProductDetail(idProduct).combine(getItemDescription(idProduct)) { productDetailState, itemDescriptionState ->
             when {
-
                 productDetailState is ResourceState.Success && itemDescriptionState is ResourceState.Error -> {
                     // If just one is successful return the successful one
                     logger.d(REPOSITORY_PRODUCT_DETAIL_COMBINED, "Only productDetail is Success")
                     ResourceState.Success(productDetailState.data)
-
                 }
                 productDetailState is ResourceState.Success && itemDescriptionState is ResourceState.Success -> {
                     // If both are successful, combine the results
@@ -84,5 +79,4 @@ class ItemsRepositoryImpl(private val meliApi: MeliApi, private val logger: Logg
                 }
             }
         }.flowOn(Dispatchers.Default)
-
 }

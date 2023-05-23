@@ -19,7 +19,6 @@ import denise.mendez.domain.utils.TEXT_PLAIN_FORMAT
 import java.text.NumberFormat
 import java.util.Locale
 
-
 fun View.hideKeyboard() {
     context.hideKeyboard(this)
 }

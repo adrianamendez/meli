@@ -3,7 +3,6 @@ package denise.mendez.meli.utils
 import android.os.SystemClock
 import android.view.View
 
-
 private const val MIN_CLICK_INTERVAL = 800
 
 class OnSingleClickListener(

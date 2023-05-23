@@ -10,7 +10,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-
 class NetworkStatusHelper(private val context: Context) : SingleLiveEvent<NetworkStatus>() {
 
     val validateNetworkConnections: MutableSet<Network> = HashSet()
@@ -97,5 +96,4 @@ class NetworkStatusHelper(private val context: Context) : SingleLiveEvent<Networ
         super.onInactive()
         connectivityManager.unregisterNetworkCallback(connectivityManagerCallback)
     }
-
 }

@@ -76,6 +76,18 @@ dependencies {
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.glide)
 
+    implementation(libs.mockito.kotlin)
+    implementation(libs.coroutines.test)
+    implementation(libs.junit)
+    implementation(libs.io.mockk)
+    implementation(libs.kotlinx.coroutines.test)
+    implementation(libs.androidx.test.core)
+    implementation(libs.mockito.core)
+    implementation(libs.androidx.test.runner)
+    implementation(libs.core.testing)
+    implementation(libs.mockitokotlin2)
+    implementation(libs.kotlin.reflect)
+
 }
 
 kapt {

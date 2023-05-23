@@ -7,7 +7,6 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 import javax.inject.Singleton
 
-
 @Singleton
 class SitesUseCaseImpl @Inject constructor(private val sitesRepository: SitesRepository) :
     SitesUseCase {

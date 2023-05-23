@@ -1,7 +1,6 @@
 package denise.mendez.data.remote.models
 
 import com.squareup.moshi.Json
-import denise.mendez.domain.utils.EMPTY_INT
 import denise.mendez.domain.utils.EMPTY_LONG
 import denise.mendez.domain.utils.EMPTY_STRING
 

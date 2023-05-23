@@ -14,7 +14,6 @@ import denise.mendez.domain.repositories.SitesRepository
 import denise.mendez.domain.utils.Logger
 import javax.inject.Singleton
 
-
 @Module
 @InstallIn(SingletonComponent::class)
 class RepositoryModule {
@@ -37,6 +36,5 @@ class RepositoryModule {
     fun provideSitesRepository(
         meliApi: MeliApi,
         logger: Logger
-    ): SitesRepository = SitesRepositoryImpl(meliApi,logger)
-
+    ): SitesRepository = SitesRepositoryImpl(meliApi, logger)
 }

@@ -18,4 +18,3 @@ inline fun <reified T : ViewModel> Fragment.viewModel(
         viewModelProvider.get(T::class.java)
     }
 }
-

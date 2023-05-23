@@ -8,11 +8,10 @@ import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import denise.mendez.meli.adapter.GenericAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import denise.mendez.data.network.MessageExceptionInfo
 import denise.mendez.data.network.NetworkStatusHelper
 import denise.mendez.meli.R
+import denise.mendez.meli.adapter.GenericAdapter
 import denise.mendez.meli.common.BaseFragment
 import denise.mendez.meli.components.CustomDialogFragment
 import denise.mendez.meli.databinding.FragmentSearchBinding
@@ -51,7 +50,7 @@ class SearchFragment : BaseFragment<SearchViewModel>(R.layout.fragment_search) {
     }
 
     override fun showError(messageExceptionInfo: Int) {
-        showDialog(resources.getString(R.string.title_generic_exception_error),resources.getString(messageExceptionInfo))
+        showDialog(resources.getString(R.string.title_generic_exception_error), resources.getString(messageExceptionInfo))
         binding.includeGenericErrorView.titleText.text = resources.getString(messageExceptionInfo)
     }
 
@@ -62,9 +61,12 @@ class SearchFragment : BaseFragment<SearchViewModel>(R.layout.fragment_search) {
                 .setIcon(R.drawable.ic_error, R.color.white)
                 .setTitle(title)
                 .setMessage(body)
-                .setPositiveButton(R.string.accept_label, OnSingleClickListener {
-                    dialog?.dismiss()
-                })
+                .setPositiveButton(
+                    R.string.accept_label,
+                    OnSingleClickListener {
+                        dialog?.dismiss()
+                    }
+                )
                 .setCancelable(false)
                 .create()
             dialog.show(it.supportFragmentManager, TAG)
@@ -91,27 +93,35 @@ class SearchFragment : BaseFragment<SearchViewModel>(R.layout.fragment_search) {
 
     private fun addSearchListener() {
         binding.productsSearchview.setOnQueryTextListener(object :
-            SearchView.OnQueryTextListener {
-            override fun onQueryTextChange(newText: String): Boolean {
-                return true
-            }
+                SearchView.OnQueryTextListener {
+                override fun onQueryTextChange(newText: String): Boolean {
+                    return true
+                }
 
-            override fun onQueryTextSubmit(query: String): Boolean {
-                viewModel.searchingProduct(query)
-                return true
-            }
-        })
+                override fun onQueryTextSubmit(query: String): Boolean {
+                    viewModel.searchingProduct(query)
+                    return true
+                }
+            })
     }
 
     private fun addListeners() {
-        viewModel.navigationEvent.observe(viewLifecycleOwner, Observer {
-            navigateFragment(it)
-        })
-        viewModel.notFoundSearch.observe(viewLifecycleOwner, Observer {
-            if (it) showDialog(
-                resources.getString(R.string.title_generic_exception_error),
-                resources.getString(R.string.empty_body_not_found_label),
-            )
-        })
+        viewModel.navigationEvent.observe(
+            viewLifecycleOwner,
+            Observer {
+                navigateFragment(it)
+            }
+        )
+        viewModel.notFoundSearch.observe(
+            viewLifecycleOwner,
+            Observer {
+                if (it) {
+                    showDialog(
+                        resources.getString(R.string.title_generic_exception_error),
+                        resources.getString(R.string.empty_body_not_found_label)
+                    )
+                }
+            }
+        )
     }
 }

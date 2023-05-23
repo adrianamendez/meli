@@ -20,13 +20,9 @@ open class BaseViewModel() : ViewModel() {
     protected val _navigationEvent = SingleLiveEvent<NavigationEvents>()
     val navigationEvent get() = _navigationEvent.asLiveData()
     fun showError(errorResponse: String?) {
-
-
         errorResponse?.let {
-
             errorMessageSingle.postValue(handleErrorUser(it))
         }
-
     }
 
     private fun handleErrorUser(errorMsg: String) =
@@ -34,7 +30,6 @@ open class BaseViewModel() : ViewModel() {
             errorMsg.contains(HTTP_ERROR) -> {
                 // Do something specific for HTTP errors
                 R.string.http_error
-
             }
             errorMsg.contains(NETWORK_ERROR) -> {
                 // Do something specific for network errors

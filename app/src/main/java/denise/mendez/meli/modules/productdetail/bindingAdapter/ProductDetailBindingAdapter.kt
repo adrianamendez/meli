@@ -4,12 +4,12 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
-import denise.mendez.meli.adapter.GenericAdapter
-import denise.mendez.meli.adapter.ItemDataAbstract
 import com.example.basicworktest.denise.mendez.utils.CubeInDepthTransformer
 import denise.mendez.domain.models.Product.ItemStatus.NEW
 import denise.mendez.domain.models.Product.ItemStatus.USED
 import denise.mendez.meli.R
+import denise.mendez.meli.adapter.GenericAdapter
+import denise.mendez.meli.adapter.ItemDataAbstract
 import denise.mendez.meli.modules.productdetail.entities.PictureModel
 import denise.mendez.meli.modules.search.entities.ProductItemModel
 import denise.mendez.meli.utils.getScreenWidth
@@ -23,7 +23,9 @@ fun TextView.itemCondition(product: ProductItemModel?) {
             else -> context.getString(R.string.condition_not_specified_label)
         }
         text = context.getString(
-            R.string.condition_formatted, condition, it.soldQuantity
+            R.string.condition_formatted,
+            condition,
+            it.soldQuantity
         )
     }
 }
@@ -43,7 +45,7 @@ fun ViewPager2.loadContent(list: List<PictureModel>?) {
                 list.map { model -> ItemDataAbstract(model) }
             )
             setPageTransformer(CubeInDepthTransformer())
-            setCurrentItem(0,true)
+            setCurrentItem(0, true)
         }
     }
 }

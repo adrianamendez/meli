@@ -117,7 +117,7 @@ class CustomDialogFragment : AppCompatDialogFragment() {
             @StringRes positiveButtonId: Int,
             listener: View.OnClickListener? = null
         ):
-                Builder {
+            Builder {
             arguments.putString(ARGUMENT_POSITIVE_BUTTON, contextLocal.getString(positiveButtonId))
             onPositiveClickListener = listener
             return this
@@ -127,7 +127,7 @@ class CustomDialogFragment : AppCompatDialogFragment() {
             @StringRes positiveButtonId: Int,
             listener: View.OnClickListener? = null
         ):
-                Builder {
+            Builder {
             arguments.putString(ARGUMENT_NEGATIVE_BUTTON, contextLocal.getString(positiveButtonId))
             onNegativeClickListener = listener
             return this
@@ -227,7 +227,6 @@ class CustomDialogFragment : AppCompatDialogFragment() {
         }
     }
 
-
     private fun setIcon(@DrawableRes drawableId: Int, @ColorRes color: Int) {
         with(binding.imageViewDialogIcon) {
             if (drawableId == NO_ID || context == null) {
@@ -247,7 +246,6 @@ class CustomDialogFragment : AppCompatDialogFragment() {
             textView.visibility = View.GONE
         }
     }
-
 
     private fun setButtonText(button: Button, key: String) {
         val text = arguments?.getString(key)

@@ -9,7 +9,7 @@ import denise.mendez.meli.databinding.ViewPicturesBinding
 import denise.mendez.meli.modules.productdetail.entities.PictureModel
 
 class ProductDetailItemView(
-    override val context: Context,
+    override val context: Context
 ) : ItemView<PictureModel> {
 
     private val binding = ViewPicturesBinding.inflate(LayoutInflater.from(context))

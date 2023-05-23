@@ -7,12 +7,11 @@ import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import denise.mendez.meli.adapter.GenericAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
-import denise.mendez.data.network.MessageExceptionInfo
 import denise.mendez.data.network.NetworkStatusHelper
 import denise.mendez.meli.R
+import denise.mendez.meli.adapter.GenericAdapter
 import denise.mendez.meli.common.BaseFragment
 import denise.mendez.meli.components.CustomDialogFragment
 import denise.mendez.meli.databinding.FragmentProductDetailBinding
@@ -49,7 +48,7 @@ class ProductDetailFragment :
     }
 
     override fun showError(messageExceptionInfo: Int) {
-        showDialog(resources.getString(R.string.title_generic_exception_error),resources.getString(messageExceptionInfo))
+        showDialog(resources.getString(R.string.title_generic_exception_error), resources.getString(messageExceptionInfo))
         binding.includeGenericErrorView.titleText.text = resources.getString(messageExceptionInfo)
     }
 
@@ -66,9 +65,12 @@ class ProductDetailFragment :
         binding.shareTextview.setSingleClickListener {
             addSingleClickShare()
         }
-        viewModel.navigationEvent.observe(viewLifecycleOwner, Observer {
-            navigateFragment(it)
-        })
+        viewModel.navigationEvent.observe(
+            viewLifecycleOwner,
+            Observer {
+                navigateFragment(it)
+            }
+        )
     }
 
     private fun addSingleClickShare() {
@@ -93,12 +95,17 @@ class ProductDetailFragment :
                 binding.viewPagerProductDetail
             ) { tab, position -> }.attach()
         }
-        viewModel.emptyDetail.observe(viewLifecycleOwner, Observer {
-            if (it) showDialog(
-                resources.getString(R.string.title_generic_exception_error),
-                resources.getString(R.string.empty_description_body_label),
-            )
-        })
+        viewModel.emptyDetail.observe(
+            viewLifecycleOwner,
+            Observer {
+                if (it) {
+                    showDialog(
+                        resources.getString(R.string.title_generic_exception_error),
+                        resources.getString(R.string.empty_description_body_label)
+                    )
+                }
+            }
+        )
     }
 
     private fun showDialog(title: String, body: String) {
@@ -108,9 +115,12 @@ class ProductDetailFragment :
                 .setIcon(R.drawable.ic_error, R.color.white)
                 .setTitle(title)
                 .setMessage(body)
-                .setPositiveButton(R.string.accept_label, OnSingleClickListener {
-                    dialog?.dismiss()
-                })
+                .setPositiveButton(
+                    R.string.accept_label,
+                    OnSingleClickListener {
+                        dialog?.dismiss()
+                    }
+                )
                 .setCancelable(false)
                 .create()
             dialog.show(it.supportFragmentManager, TAG)

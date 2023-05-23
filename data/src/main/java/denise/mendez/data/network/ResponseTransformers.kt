@@ -755,9 +755,9 @@ public fun <T> ApiResponse<List<T>>.merge(
 public fun <T> ApiResponse.Failure<T>.message(): String {
     // We Can keep Adding Specific Error Types if needed ;D
     return when (this) {
-        is ApiResponse.Failure.Error -> "HTTP Error: "+ message()
+        is ApiResponse.Failure.Error -> "HTTP Error: " + message()
         is ApiResponse.Failure.Exception -> {
-            when(this.exception) {
+            when (this.exception) {
                 is IOException -> "Network error"
                 is TimeoutException -> "Timeout error"
                 else -> "An unknown error occurred"

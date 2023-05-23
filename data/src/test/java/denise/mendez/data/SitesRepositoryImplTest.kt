@@ -21,7 +21,6 @@ import okhttp3.ResponseBody
 import org.junit.Test
 import retrofit2.Response
 
-
 @ExperimentalCoroutinesApi
 class SitesRepositoryImplTest {
 
@@ -35,7 +34,7 @@ class SitesRepositoryImplTest {
             // given
             val response = Response.success(productSearchedDtoMockk)
             val apiResponse =
-                ApiResponse.Success(response)// directly creating an instance of ApiResponse.Success
+                ApiResponse.Success(response) // directly creating an instance of ApiResponse.Success
             coEvery { meliApi.searchProducts(SITE_ID, any(), any(), any()) } returns apiResponse
 
             // when
@@ -53,13 +52,11 @@ class SitesRepositoryImplTest {
     fun `getProducts should emit ResourceState Error when API call is failure`() = runBlocking {
         // given
 
-
         val errorResponseBody: ResponseBody? =
             ResponseBody.create("text/plain".toMediaTypeOrNull(), "")
         val errorResponse: Response<ProductSearchedDto> = Response.error(400, errorResponseBody)
 
         val apiResponse: ApiResponse<ProductSearchedDto> = ApiResponse.Failure.Error(errorResponse)
-
 
         coEvery { meliApi.searchProducts(SITE_ID, any(), any(), any()) } returns apiResponse
 
@@ -77,7 +74,4 @@ class SitesRepositoryImplTest {
             (actualResourceState as ResourceState.Error).message
         )
     }
-
 }
-
-

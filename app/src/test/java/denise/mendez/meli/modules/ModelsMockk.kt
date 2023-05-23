@@ -1,4 +1,4 @@
-package denise.mendez.domain.usecases
+package denise.mendez.meli.modules
 
 import denise.mendez.domain.models.Address
 import denise.mendez.domain.models.Attribute
@@ -14,6 +14,8 @@ import denise.mendez.domain.models.SellerAddress
 import denise.mendez.domain.models.Shipping
 import denise.mendez.domain.models.State
 import denise.mendez.domain.utils.EMPTY_STRING
+import denise.mendez.meli.modules.search.entities.ProductEntityList
+import denise.mendez.meli.modules.search.entities.ProductItemModel
 
 val picturesListMockk = listOf(
     Picture(
@@ -105,6 +107,7 @@ val sellerMockk = Seller(
     realEstateAgency = false,
     tags = listOf("normal", "user_info_verified", "credits_profile", "messages_as_seller", "messages_as_buyer")
 )
+
 val productMockk = Product(
     id = "MCO611234",
     siteId = "MCO",
@@ -139,4 +142,25 @@ val productMockk = Product(
     ),
     catalogListing = false,
     seller = sellerMockk
+)
+
+val productListMockk = listOf(productMockk, productMockk)
+
+val mockedProductItemModel = ProductItemModel(
+    id = "MCO611234",
+    title = "Short Traje De Baño Vcp Garden (0150)",
+    price = 100000.0,
+    quantity = 1,
+    thumbnail = "http://http2.mlstatic.com/D_771968-MLA48647552133_122021-I.jpg",
+    soldQuantity = 0,
+    freeShipping = true,
+    hasFulfillment = true,
+    hasShippingGuaranteed = true,
+    condition = "new"
+)
+
+val mockedProductEntityList = ProductEntityList(
+    listOf(
+        productMockk
+    )
 )

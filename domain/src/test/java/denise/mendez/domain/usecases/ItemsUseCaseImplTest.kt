@@ -12,7 +12,6 @@ import org.junit.Test
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.`when`
 
-
 @ExperimentalCoroutinesApi
 @SmallTest
 class ItemsUseCaseImplTest {
@@ -63,4 +62,3 @@ class ItemsUseCaseImplTest {
         assertEquals(repositoryFlow.first().data, useCaseFlow.first().data)
     }
 }
-

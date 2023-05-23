@@ -4,9 +4,9 @@ import android.content.Context
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
-import denise.mendez.meli.adapter.ItemView
 import com.example.basicworktest.denise.mendez.view.properties.itemViewBinding
 import denise.mendez.meli.R
+import denise.mendez.meli.adapter.ItemView
 import denise.mendez.meli.databinding.ItemProductBinding
 import denise.mendez.meli.modules.search.entities.ProductItemModel
 import denise.mendez.meli.utils.setSingleClickListener
@@ -16,9 +16,9 @@ class SearchItemView(
     onClickListener: ((ProductItemModel) -> Unit)
 ) : ItemView<ProductItemModel> {
 
-    private val binding by  itemViewBinding<ItemProductBinding>(R.layout.item_product)
+    private val binding by itemViewBinding<ItemProductBinding>(R.layout.item_product)
 
-     override val view = binding.root
+    override val view = binding.root
 
     override lateinit var data: ProductItemModel
 

@@ -13,7 +13,6 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 
-
 @ExperimentalCoroutinesApi
 @SmallTest
 class SitesUseCaseImplTest {

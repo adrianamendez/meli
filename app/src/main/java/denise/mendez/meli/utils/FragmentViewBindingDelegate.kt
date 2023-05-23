@@ -8,7 +8,6 @@ import androidx.viewbinding.ViewBinding
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
 
-
 inline fun <reified T : ViewBinding> Fragment.viewBinding() =
     FragmentViewBindingDelegate(T::class.java, this)
 
@@ -33,12 +32,11 @@ class FragmentViewBindingDelegate<T : ViewBinding>(
         })
     }
 
-
     override fun getValue(thisRef: Fragment, property: KProperty<*>): T {
-        if (binding == null)
+        if (binding == null) {
             binding = bindingClass.getMethod("bind", View::class.java)
                 .invoke(null, thisRef.requireView()) as T
+        }
         return binding!!
     }
-
 }

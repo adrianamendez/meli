@@ -22,7 +22,6 @@ import okhttp3.ResponseBody
 import org.junit.Test
 import retrofit2.Response
 
-
 @ExperimentalCoroutinesApi
 class ItemsRepositoryImplTest {
     private val meliApi: MeliApi = mockk()

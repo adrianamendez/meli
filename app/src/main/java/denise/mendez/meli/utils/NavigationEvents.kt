@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.annotation.IdRes
 import androidx.navigation.NavDirections
 
-
 sealed class NavigationEvents
 
 data class StartActivityEvent(

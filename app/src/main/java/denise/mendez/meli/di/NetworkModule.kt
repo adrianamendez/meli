@@ -3,7 +3,6 @@ package denise.mendez.meli.di
 import android.app.Application
 import android.content.Context
 import android.net.ConnectivityManager
-import android.util.Log
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
@@ -96,7 +95,6 @@ class NetworkModule {
         logger: AndroidLogger,
         @ApplicationContext context: Context
     ): OkHttpClient {
-
         val httpBuilder = OkHttpClient.Builder()
             .addInterceptor(interceptor)
             .addInterceptor(networkInterceptor)
@@ -145,5 +143,4 @@ class NetworkModule {
     fun providesMeli(
         retrofit: Retrofit
     ): MeliApi = retrofit.create(MeliApi::class.java)
-
 }

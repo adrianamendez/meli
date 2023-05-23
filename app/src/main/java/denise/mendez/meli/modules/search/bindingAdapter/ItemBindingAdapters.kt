@@ -1,6 +1,5 @@
 package denise.mendez.meli.modules.search.bindingAdapter
 
-import android.util.Log
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import android.widget.ImageView
@@ -21,8 +20,9 @@ fun TextView.hasFreeShipping(freeShipping: Boolean) {
     if (freeShipping) {
         this.text = context.resources.getString(R.string.free_shipping)
         this.visibility = VISIBLE
-    } else this.visibility = INVISIBLE
-
+    } else {
+        this.visibility = INVISIBLE
+    }
 }
 
 @BindingAdapter("hasShippingGuaranteed")
@@ -30,7 +30,9 @@ fun TextView.hasShippingGuaranteed(hasShippingGuaranteed: Boolean) {
     if (hasShippingGuaranteed) {
         this.text = context.resources.getString(R.string.guaranteed_shipping)
         this.visibility = VISIBLE
-    } else this.visibility = INVISIBLE
+    } else {
+        this.visibility = INVISIBLE
+    }
 }
 
 @BindingAdapter("fulFillmentLabel")

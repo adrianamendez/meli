@@ -1,6 +1,5 @@
 package denise.mendez.data.repository
 
-import android.util.Log
 import denise.mendez.data.mappers.SuccessItemProductSearchedMapper
 import denise.mendez.data.network.SITE_ID
 import denise.mendez.data.network.map
@@ -30,13 +29,11 @@ class SitesRepositoryImpl(private val meliApi: MeliApi, private val logger: Logg
         response.suspendOnSuccess {
             val itemDescription = map(SuccessItemProductSearchedMapper)
             if (itemDescription == null) {
-
                 logger.d(REPOSITORY_SITES, "An error occurred while mapping SuccessItemDescriptionMapper returns Null")
                 emit(ResourceState.Error(message = "An error occurred while mapping SuccessItemDescriptionMapper"))
             } else {
                 logger.d(REPOSITORY_SITES, "Success")
                 emit(ResourceState.Success(itemDescription))
-
             }
         }.suspendOnFailure {
             logger.d(REPOSITORY_SITES, message())

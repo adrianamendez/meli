@@ -1,6 +1,5 @@
 package denise.mendez.data.network
 
-
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
@@ -30,13 +29,13 @@ import java.lang.reflect.Type
  * ```
  */
 public class ApiResponseCallAdapterFactory private constructor(
-    private val coroutineScope: CoroutineScope,
+    private val coroutineScope: CoroutineScope
 ) : CallAdapter.Factory() {
 
     override fun get(
         returnType: Type,
         annotations: Array<Annotation>,
-        retrofit: Retrofit,
+        retrofit: Retrofit
     ): CallAdapter<*, *>? {
         when (getRawType(returnType)) {
             Call::class.java -> {
@@ -66,7 +65,7 @@ public class ApiResponseCallAdapterFactory private constructor(
     public companion object {
         @JvmStatic
         public fun create(
-            coroutineScope: CoroutineScope = SandwichInitializer.sandwichScope,
+            coroutineScope: CoroutineScope = SandwichInitializer.sandwichScope
         ): ApiResponseCallAdapterFactory = ApiResponseCallAdapterFactory(coroutineScope)
     }
 }
@@ -80,7 +79,7 @@ public class ApiResponseCallAdapterFactory private constructor(
  */
 internal class ApiResponseCallAdapter constructor(
     private val resultType: Type,
-    private val coroutineScope: CoroutineScope,
+    private val coroutineScope: CoroutineScope
 ) : CallAdapter<Type, Call<ApiResponse<Type>>> {
 
     override fun responseType(): Type {
@@ -101,7 +100,7 @@ internal class ApiResponseCallAdapter constructor(
  */
 internal class ApiResponseDeferredCallAdapter<T> constructor(
     private val resultType: Type,
-    private val coroutineScope: CoroutineScope,
+    private val coroutineScope: CoroutineScope
 ) : CallAdapter<T, Deferred<ApiResponse<T>>> {
 
     override fun responseType(): Type {
@@ -141,7 +140,7 @@ internal class ApiResponseDeferredCallAdapter<T> constructor(
  */
 internal class ApiResponseCallDelegate<T>(
     proxy: Call<T>,
-    private val coroutineScope: CoroutineScope,
+    private val coroutineScope: CoroutineScope
 ) : CallDelegate<T, ApiResponse<T>>(proxy) {
 
     override fun enqueueImpl(callback: Callback<ApiResponse<T>>) {
@@ -166,7 +165,6 @@ internal class ApiResponseCallDelegate<T>(
     override fun cloneImpl() = ApiResponseCallDelegate(proxy.clone(), coroutineScope)
 }
 
-
 /**
  * @author skydoves (Jaewoong Eum)
  *
@@ -174,7 +172,7 @@ internal class ApiResponseCallDelegate<T>(
  * between the two different types of [Call] requests.
  */
 internal abstract class CallDelegate<TIn, TOut>(
-    protected val proxy: Call<TIn>,
+    protected val proxy: Call<TIn>
 ) : Call<TOut> {
     final override fun enqueue(callback: Callback<TOut>) = enqueueImpl(callback)
     final override fun execute(): Response<TOut> = executeImpl()
@@ -190,6 +188,3 @@ internal abstract class CallDelegate<TIn, TOut>(
     abstract fun executeImpl(): Response<TOut>
     abstract fun cloneImpl(): Call<TOut>
 }
-
-
-
