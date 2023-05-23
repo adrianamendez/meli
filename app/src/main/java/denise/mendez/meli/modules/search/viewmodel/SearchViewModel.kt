@@ -84,8 +84,11 @@ class SearchViewModel @Inject constructor(
 
                             }
                             is ResourceState.Error -> {
+
+                                showError(result.message)
                                 showErrorUiModel()
                             }
+
                             is ResourceState.Loading -> {
                                 showEmptyStateUiModel()
                             }

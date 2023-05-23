@@ -19,14 +19,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.flowOn
 import javax.inject.Singleton
 
 @Singleton
 class ItemsRepositoryImpl(private val meliApi: MeliApi) : ItemsRepository {
-    override suspend fun getItemDescription(idItem: String): Flow<ResourceState<ItemDescription>> = flow<ResourceState<ItemDescription>> {
-        val response = meliApi.getItemDescription(idItem)
+    override suspend fun getItemDescription(idProduct: String): Flow<ResourceState<ItemDescription>> = flow<ResourceState<ItemDescription>> {
+        val response = meliApi.getItemDescription(idProduct)
         response.suspendOnSuccess {
             val itemDescription = map(SuccessItemDescriptionMapper)
             if (itemDescription == null) {
@@ -37,6 +36,7 @@ class ItemsRepositoryImpl(private val meliApi: MeliApi) : ItemsRepository {
                 Log.d(REPOSITORY_ITEMS, "Success")
             }
         }.suspendOnFailure {
+
             emit(ResourceState.Error(message = message()))
             Log.d(REPOSITORY_ITEMS, message())
         }

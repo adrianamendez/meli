@@ -54,4 +54,11 @@
     <string name="title_detail_product_fragment">Detalle del producto</string>
 
     <string name="empty_description_body_label">No se pudo cargar toda la información</string>
+
+
+    <!--Custom User Errors-->
+    <string name="network_error">Al parecer hay un error de red ! revisa tu conexión</string>
+    <string name="http_error">Algo salió mal, podrías intentar nuevamente ?</string>
+    <string name="timeout_error">Esto ha tardado mucho podrías revisar tu conexión?</string>
+    <string name="generic_error">Algo ha ocurrido, intenta nuevamente</string>
 </resources>

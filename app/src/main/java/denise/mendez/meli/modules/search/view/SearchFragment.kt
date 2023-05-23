@@ -50,9 +50,9 @@ class SearchFragment : BaseFragment<SearchViewModel>(R.layout.fragment_search) {
         addListeners()
     }
 
-    override fun showError(messageExceptionInfo: MessageExceptionInfo) {
-        showDialog(messageExceptionInfo.title, messageExceptionInfo.message)
-        binding.includeGenericErrorView.titleText.text = messageExceptionInfo.message
+    override fun showError(messageExceptionInfo: Int) {
+        showDialog(resources.getString(R.string.title_generic_exception_error),resources.getString(messageExceptionInfo))
+        binding.includeGenericErrorView.titleText.text = resources.getString(messageExceptionInfo)
     }
 
     private fun showDialog(title: String, body: String) {

@@ -39,6 +39,8 @@ import okhttp3.Headers
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.IOException
+import java.util.concurrent.TimeoutException
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
 
@@ -751,9 +753,16 @@ public fun <T> ApiResponse<List<T>>.merge(
  * @return An error message from the [ApiResponse.Failure].
  */
 public fun <T> ApiResponse.Failure<T>.message(): String {
+    // We Can keep Adding Specific Error Types if needed :D
     return when (this) {
-        is ApiResponse.Failure.Error -> message()
-        is ApiResponse.Failure.Exception -> message()
+        is ApiResponse.Failure.Error -> "HTTP Error: "+ message()
+        is ApiResponse.Failure.Exception -> {
+            when(this.exception) {
+                is IOException -> "Network error"
+                is TimeoutException -> "Timeout error"
+                else -> "An unknown error occurred"
+            }
+        }
     }
 }
 

@@ -4,5 +4,5 @@ import denise.mendez.data.network.MessageExceptionInfo
 
 
 interface ErrorView {
-    fun showError(messageExceptionInfo: MessageExceptionInfo)
+    fun showError(messageExceptionInfo: Int)
 }
