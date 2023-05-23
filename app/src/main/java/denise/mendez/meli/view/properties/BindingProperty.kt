@@ -6,7 +6,7 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import com.example.basicworktest.denise.mendez.adapter.ItemView
+import denise.mendez.meli.adapter.ItemView
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
 

@@ -7,7 +7,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.example.basicworktest.denise.mendez.adapter.GenericAdapter
+import denise.mendez.meli.adapter.GenericAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import denise.mendez.data.network.MessageExceptionInfo

@@ -4,7 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
-import com.example.basicworktest.denise.mendez.adapter.ItemView
+import denise.mendez.meli.adapter.ItemView
 import denise.mendez.meli.databinding.ViewPicturesBinding
 import denise.mendez.meli.modules.productdetail.entities.PictureModel
 

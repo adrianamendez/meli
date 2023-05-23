@@ -14,9 +14,12 @@ import denise.mendez.domain.models.ProductDetails
 import denise.mendez.domain.repositories.ItemsRepository
 import denise.mendez.domain.utils.REPOSITORY_ITEMS
 import denise.mendez.domain.utils.REPOSITORY_PRODUCT_DETAIL
+import denise.mendez.domain.utils.REPOSITORY_PRODUCT_DETAIL_COMBINED
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.flowOn
 import javax.inject.Singleton
 
@@ -42,12 +45,12 @@ class ItemsRepositoryImpl(private val meliApi: MeliApi) : ItemsRepository {
     override suspend fun getItemProductDetail(idProduct: String): Flow<ResourceState<ProductDetails>> = flow<ResourceState<ProductDetails>> {
         val response = meliApi.getProductDetails(idProduct)
         response.suspendOnSuccess {
-            val itemDescription = map(SuccessItemProductDetailMapper)
-            if (itemDescription == null) {
-                emit(ResourceState.Error(message = "An error occurred while mapping SuccessItemDescriptionMapper"))
-                Log.d(REPOSITORY_PRODUCT_DETAIL, "An error occurred while mapping SuccessItemDescriptionMapper Returns Null")
+            val productDetail = map(SuccessItemProductDetailMapper)
+            if (productDetail == null) {
+                emit(ResourceState.Error(message = "An error occurred while mapping SuccessItemProductDetailMapper"))
+                Log.d(REPOSITORY_PRODUCT_DETAIL, "An error occurred while mapping SuccessItemProductDetailMapper Returns Null")
             } else {
-                emit(ResourceState.Success(itemDescription))
+                emit(ResourceState.Success(productDetail))
                 Log.d(REPOSITORY_PRODUCT_DETAIL, "Success")
             }
         }.suspendOnFailure {
@@ -55,4 +58,30 @@ class ItemsRepositoryImpl(private val meliApi: MeliApi) : ItemsRepository {
             Log.d(REPOSITORY_PRODUCT_DETAIL, message())
         }
     }.flowOn(Dispatchers.Default)
+
+
+    override suspend fun getItemProductDetailWithDescription(idProduct: String): Flow<ResourceState<ProductDetails>> =
+        getItemProductDetail(idProduct).combine(getItemDescription(idProduct)) { productDetailState, itemDescriptionState ->
+            when {
+
+                productDetailState is ResourceState.Success && itemDescriptionState is ResourceState.Error -> {
+                    // If just one is successful return the successful one
+                    Log.d(REPOSITORY_PRODUCT_DETAIL_COMBINED, "Only productDetail is Success")
+                    ResourceState.Success(productDetailState.data)
+
+                }
+                productDetailState is ResourceState.Success && itemDescriptionState is ResourceState.Success -> {
+                    // If both are successful, combine the results
+                    val combinedDetail = productDetailState.data.apply { this?.description = itemDescriptionState.data }
+                    Log.d(REPOSITORY_PRODUCT_DETAIL_COMBINED, "Both are Success")
+                    ResourceState.Success(combinedDetail)
+                }
+
+                else -> {
+                    Log.d(REPOSITORY_PRODUCT_DETAIL_COMBINED, "Both are Error")
+                    ResourceState.Error("An unexpected error occurred")
+                }
+            }
+        }.flowOn(Dispatchers.Default)
+
 }

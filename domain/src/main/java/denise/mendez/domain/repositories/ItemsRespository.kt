@@ -7,7 +7,8 @@ import kotlinx.coroutines.flow.Flow
 
 interface ItemsRepository {
 
-    suspend fun getItemDescription(idItem: String): Flow<ResourceState<ItemDescription>>
+    suspend fun getItemDescription(idProduct: String): Flow<ResourceState<ItemDescription>>
 
     suspend fun getItemProductDetail(idProduct: String): Flow<ResourceState<ProductDetails>>
+    suspend fun getItemProductDetailWithDescription(idProduct: String): Flow<ResourceState<ProductDetails>>
 }

@@ -4,8 +4,8 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
-import com.example.basicworktest.denise.mendez.adapter.GenericAdapter
-import com.example.basicworktest.denise.mendez.adapter.ItemDataAbstract
+import denise.mendez.meli.adapter.GenericAdapter
+import denise.mendez.meli.adapter.ItemDataAbstract
 import com.example.basicworktest.denise.mendez.utils.CubeInDepthTransformer
 import denise.mendez.domain.models.Product.ItemStatus.NEW
 import denise.mendez.domain.models.Product.ItemStatus.USED

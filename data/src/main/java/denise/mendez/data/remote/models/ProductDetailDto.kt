@@ -3,23 +3,24 @@ package denise.mendez.data.remote.models
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import denise.mendez.domain.models.ProductDetails
+import denise.mendez.domain.utils.EMPTY_STRING
 
 @JsonClass(generateAdapter = true)
 data class ProductDetailDto(
-    val id: String,
-    val title: String,
+    val id: String? = EMPTY_STRING,
+    val title: String? = EMPTY_STRING,
     @field:Json(name = "category_id")
-    val idCategory: String,
-    val pictures: List<PictureDto>,
-    val permalink: String,
-    val descriptionDto: ItemDescriptionDto
+    val idCategory: String? = EMPTY_STRING,
+    val pictures: List<PictureDto>? = emptyList(),
+    val permalink: String? = EMPTY_STRING,
+    val descriptionDto: ItemDescriptionDto = ItemDescriptionDto()
 ) {
 
     fun mapToDomain() = ProductDetails(
-        id,
-        title,
-        pictures.map { it.mapToDomain() },
-        permalink = permalink,
+        id ?: EMPTY_STRING,
+        title ?: EMPTY_STRING,
+        pictures?.map { it.mapToDomain() } ?: emptyList(),
+        permalink = permalink ?: EMPTY_STRING,
         description = descriptionDto.mapToDomain()
     )
 }

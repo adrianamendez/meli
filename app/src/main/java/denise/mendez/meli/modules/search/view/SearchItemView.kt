@@ -4,7 +4,7 @@ import android.content.Context
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
-import com.example.basicworktest.denise.mendez.adapter.ItemView
+import denise.mendez.meli.adapter.ItemView
 import com.example.basicworktest.denise.mendez.view.properties.itemViewBinding
 import denise.mendez.meli.R
 import denise.mendez.meli.databinding.ItemProductBinding

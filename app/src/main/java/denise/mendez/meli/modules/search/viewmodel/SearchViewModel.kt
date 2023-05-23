@@ -14,6 +14,8 @@ import denise.mendez.meli.common.ScopedViewModel.UiModel
 import denise.mendez.meli.common.SingleLiveEvent
 import denise.mendez.meli.modules.search.entities.ProductEntityList
 import denise.mendez.meli.modules.search.entities.ProductItemModel
+import denise.mendez.meli.modules.search.view.SearchFragmentDirections
+import denise.mendez.meli.utils.NavigationToDirectionEvent
 import denise.mendez.meli.utils.asLiveData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -40,9 +42,6 @@ class SearchViewModel @Inject constructor(
         private set
     private var defaultList = ProductEntityList(null)
         private set
-    private val _state = MutableStateFlow(SearchedProductViewState())
-
-    val state: StateFlow<SearchedProductViewState> get() = _state
 
     class SearchedProductItem(val productsSearchedItem: List<ProductItemModel>) :
         UiModel.FeatureModel()
@@ -68,7 +67,7 @@ class SearchViewModel @Inject constructor(
                     PAGE_SIZE
                 ).collect() { result ->
                     withContext(Dispatchers.Main) {
-                        _state.value = when (result) {
+                         when (result) {
                             is ResourceState.Success -> {
                                 val searchedProductList = result.data
                                 if (searchedProductList.isNullOrEmpty()) {
@@ -82,21 +81,15 @@ class SearchViewModel @Inject constructor(
                                     )
                                     defaultList = ProductEntityList(searchedProductList)
                                 }
-                                _state.value.copy(
-                                    getProducts = searchedProductList,
-                                    isLoading = false
-                                )
+
                             }
                             is ResourceState.Error -> {
                                 showErrorUiModel()
-                                _state.value.copy(error = result.message)
                             }
                             is ResourceState.Loading -> {
                                 showEmptyStateUiModel()
-                                _state.value.copy(isLoading = true)
                             }
                         }
-
 
                     }
                 }
@@ -106,10 +99,10 @@ class SearchViewModel @Inject constructor(
 
 
     fun onItemSelected(item: ProductItemModel) {
-        /*  _navigationEvent.value =
+          _navigationEvent.value =
               NavigationToDirectionEvent(
                   SearchFragmentDirections.actionSearchFragmentToProductDetailFragment(item, defaultList)
-              ) */
+              )
     }
 
     private fun lastSearchedList() {

@@ -1,5 +1,6 @@
 package denise.mendez.meli.modules.search.bindingAdapter
 
+import android.util.Log
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import android.widget.ImageView
@@ -12,6 +13,7 @@ import denise.mendez.meli.view.imageLoadingCaching.ImageLoader
 
 @BindingAdapter("loadImageUrl")
 fun ImageView.loadImage(url: String?) {
+    Log.d("loadImageUrl", "url SearchedItem: $url")
     url?.let { ImageLoader(context).loadImage(url, this) }
 }
 

@@ -1,4 +1,4 @@
-package com.example.basicworktest.denise.mendez.adapter
+package denise.mendez.meli.adapter
 
 import android.annotation.SuppressLint
 import android.view.ViewGroup

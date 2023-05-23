@@ -8,20 +8,26 @@ import denise.mendez.meli.common.ScopedViewModel
 import denise.mendez.meli.common.SingleLiveEvent
 import denise.mendez.data.network.MessageException
 import denise.mendez.data.network.NetworkStatus
+import denise.mendez.domain.ResourceState
 import denise.mendez.domain.models.ProductDetails
 import denise.mendez.domain.usecases.ItemsUseCase
 import denise.mendez.domain.utils.EMPTY_STRING
 import denise.mendez.meli.modules.productdetail.entities.PictureModel
 import denise.mendez.meli.modules.productdetail.entities.ProductDetailModel
+import denise.mendez.meli.modules.productdetail.view.ProductDetailFragmentDirections
 import denise.mendez.meli.modules.search.entities.ProductEntityList
 import denise.mendez.meli.modules.search.entities.ProductItemModel
+import denise.mendez.meli.modules.search.viewmodel.SearchViewModel
+import denise.mendez.meli.utils.NavigationToDirectionEvent
 import denise.mendez.meli.utils.asLiveData
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
-class ProductDetailViewModel  @Inject constructor(
+class ProductDetailViewModel @Inject constructor(
     private val itemsUseCase: ItemsUseCase
 ) : BaseViewModel() {
 
@@ -58,56 +64,62 @@ class ProductDetailViewModel  @Inject constructor(
         if (::itemJob.isInitialized) itemJob.cancel()
         if (productId.isNotEmpty())
             itemJob = viewModelScope.launch {
-                itemsUseCase.getItemProductDetail(
+                itemsUseCase.getItemProductDetailWithDescription(
                     productId
-                ).collect {
-
-
-                    /*
-                    it.collect {
-                        val productDetailModel = ProductDetailModel.mapFromDomain(it)
-                        showEmptyStateUiModel()
-                        _productDetail.value = productDetailModel
-                        validateDescription(it)
+                ).collect { result ->
+                    withContext(Dispatchers.Main) {
+                        when (result) {
+                            is ResourceState.Success -> {
+                                result.data?.let { data ->
+                                    val productDetailModel = ProductDetailModel.mapFromDomain(data)
+                                    showEmptyStateUiModel()
+                                    _productDetail.value = productDetailModel
+                                    validateDescription(data)
+                                } ?: run {
+                                    _model.postValue(ScopedViewModel.UiModel.EmptyState)
+                                }
+                            }
+                            is ResourceState.Error -> {
+                                showErrorUiModel()
+                            }
+                            is ResourceState.Loading -> {
+                                showErrorUiModel()
+                            }
+                        }
                     }
-                }.onError {
-                    showError(this)
-                    showErrorUiModel()
-                }*/
                 }
             }
-                // else _model.postValue(ScopedViewModel.UiModel.EmptyState)
-            }
-
-        private fun validateDescription(productDetailModel: ProductDetails) {
-            if (productDetailModel.description?.plainText == EMPTY_STRING) _emptyDetail.value = true
-        }
-
-        fun showHideInternetConnection(networkStatus: NetworkStatus) {
-            if (!firstDefaultInternetCall)
-                when (networkStatus) {
-                    NetworkStatus.Available -> showEmptyStateUiModel()
-                    NetworkStatus.Unavailable -> showNoInternetUiModel()
-                }
-            else {
-                firstDefaultInternetCall = false
-            }
-        }
-
-        fun onBackPressed() {
-          /*  _navigationEvent.value = NavigationToDirectionEvent(
-                ProductDetailFragmentDirections.actionProductDetailFragmentToSearchFragment(
-                    defaultList
-                )
-            )*/
-        }
-
-        private fun showEmptyStateUiModel() = _model.postValue(ScopedViewModel.UiModel.EmptyState)
-
-        private fun showNoInternetUiModel() =
-            _model.postValue(ScopedViewModel.UiModel.NoInternetState)
-
-        private fun showErrorUiModel() = _model.postValue(ScopedViewModel.UiModel.ErrorState)
-
-        private fun showLoaderUiModel() = _model.postValue(ScopedViewModel.UiModel.Loading)
     }
+
+    private fun validateDescription(productDetailModel: ProductDetails) {
+        if (productDetailModel.description?.plainText == EMPTY_STRING) _emptyDetail.value = true
+    }
+
+    fun showHideInternetConnection(networkStatus: NetworkStatus) {
+        if (!firstDefaultInternetCall)
+            when (networkStatus) {
+                NetworkStatus.Available -> showEmptyStateUiModel()
+                NetworkStatus.Unavailable -> showNoInternetUiModel()
+            }
+        else {
+            firstDefaultInternetCall = false
+        }
+    }
+
+    fun onBackPressed() {
+          _navigationEvent.value = NavigationToDirectionEvent(
+              ProductDetailFragmentDirections.actionProductDetailFragmentToSearchFragment(
+                  defaultList
+              )
+          )
+    }
+
+    private fun showEmptyStateUiModel() = _model.postValue(ScopedViewModel.UiModel.EmptyState)
+
+    private fun showNoInternetUiModel() =
+        _model.postValue(ScopedViewModel.UiModel.NoInternetState)
+
+    private fun showErrorUiModel() = _model.postValue(ScopedViewModel.UiModel.ErrorState)
+
+    private fun showLoaderUiModel() = _model.postValue(ScopedViewModel.UiModel.Loading)
+}

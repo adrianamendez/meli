@@ -13,6 +13,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import denise.mendez.data.network.ApiResponseCallAdapterFactory
 import denise.mendez.data.network.BASE_URL
+import denise.mendez.data.network.ItemDescriptionDtoJsonAdapter
 import denise.mendez.data.remote.apis.MeliApi
 import denise.mendez.data.storage.DataStorage
 import denise.mendez.meli.MeliApplication
@@ -58,6 +59,7 @@ class NetworkModule {
     @Provides
     fun provideMoshi(): Moshi {
         return Moshi.Builder()
+            .add(ItemDescriptionDtoJsonAdapter())
             .add(KotlinJsonAdapterFactory()).build()
     }
 

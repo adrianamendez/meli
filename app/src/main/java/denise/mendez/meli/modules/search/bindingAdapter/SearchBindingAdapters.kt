@@ -5,8 +5,8 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.basicworktest.denise.mendez.adapter.GenericAdapter
-import com.example.basicworktest.denise.mendez.adapter.ItemDataAbstract
+import denise.mendez.meli.adapter.GenericAdapter
+import denise.mendez.meli.adapter.ItemDataAbstract
 import denise.mendez.meli.common.ScopedViewModel.UiModel
 import denise.mendez.meli.modules.search.viewmodel.SearchViewModel
 import denise.mendez.meli.utils.hideKeyboard

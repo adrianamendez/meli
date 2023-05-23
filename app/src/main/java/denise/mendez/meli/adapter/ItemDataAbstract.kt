@@ -1,4 +1,4 @@
-package com.example.basicworktest.denise.mendez.adapter
+package denise.mendez.meli.adapter
 
 class ItemDataAbstract<T>(
     override val data: T,
