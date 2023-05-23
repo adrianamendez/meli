@@ -10,10 +10,6 @@
 
 Proyecto implementado con arquitectura Mvvm Clean de 3 Layers.
 
-<p align="center">
-  <img src="screenshots/clean_meli.png" width="400"/>
-</p>
-
 Tecnologías relevantes utilizadas:
 
 - Moshi
@@ -42,6 +38,9 @@ El proyecto consta de dos vistas en la primera se realiza la búsqueda de un art
 Se desarrolló un modelo de UI por estados para ambas vistas, un Observador de estado de red en caso de perder conexión se le informará al usuario inmediatamente yvalidaciones de servicio.
 
 La intención es mostrar capacidades de arquitectura y desacoplamiento.
+
+## Android  Studio 
+Electric Eel | 2022.1.1 Patch 2
 
 ## TODO  Deseables
 
