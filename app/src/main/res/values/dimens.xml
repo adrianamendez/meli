@@ -17,6 +17,7 @@
     <dimen name="generic_button_padding_large">24dp</dimen>
     <dimen name="generic_width_button">100dp</dimen>
     <dimen name="generic_height_button">40dp</dimen>
+    <dimen name="padding_bottom">60dp</dimen>
     <dimen name="padding_viewpager">40dp</dimen>
 
 <!-- Text Sizes -->
