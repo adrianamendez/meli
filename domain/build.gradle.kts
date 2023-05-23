@@ -47,7 +47,14 @@ android {
 }
 
 dependencies {
-
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
+    implementation(libs.mockito.kotlin)
+    implementation(libs.coroutines.test)
+    implementation(libs.junit)
+    implementation(libs.io.mockk)
+    implementation(libs.kotlinx.coroutines.test)
+    implementation(libs.androidx.test.core)
+    implementation(libs.mockito.core)
+    implementation(libs.androidx.test.runner)
 }

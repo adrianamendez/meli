@@ -59,5 +59,7 @@ dependencies {
     implementation(libs.retrofit2)
     implementation(libs.hilt.android)
     implementation(libs.datastore.preferences)
+    implementation(libs.mockito.kotlin)
+    implementation(libs.coroutines.test)
 
 }
