@@ -13,7 +13,6 @@ import denise.mendez.meli.view.imageLoadingCaching.ImageLoader
 
 @BindingAdapter("loadImageUrl")
 fun ImageView.loadImage(url: String?) {
-    Log.d("loadImageUrl", "url SearchedItem: $url")
     url?.let { ImageLoader(context).loadImage(url, this) }
 }
 

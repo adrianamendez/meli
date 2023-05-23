@@ -16,6 +16,7 @@ import denise.mendez.data.network.BASE_URL
 import denise.mendez.data.network.ItemDescriptionDtoJsonAdapter
 import denise.mendez.data.remote.apis.MeliApi
 import denise.mendez.data.storage.DataStorage
+import denise.mendez.domain.utils.AndroidLogger
 import denise.mendez.meli.MeliApplication
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -92,6 +93,7 @@ class NetworkModule {
     fun provideOkHttpClient(
         interceptor: Interceptor,
         networkInterceptor: Interceptor,
+        logger: AndroidLogger,
         @ApplicationContext context: Context
     ): OkHttpClient {
 
@@ -113,7 +115,7 @@ class NetworkModule {
                 .protocols(mutableListOf(Protocol.HTTP_1_1))
                 .build()
         } catch (e: Exception) {
-            Log.d("ErrorNetwork", e.toString())
+            logger.d("ErrorNetwork", e.toString())
         }
         return httpBuilder
             .protocols(mutableListOf(Protocol.HTTP_1_1))

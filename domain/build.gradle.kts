@@ -37,6 +37,9 @@ android {
         jvmTarget = "11"
     }
 
+    packagingOptions {
+        resources.excludes.add("META-INF/*")
+    }
     kotlinter {
         ignoreFailures = false
         reporters = arrayOf("checkstyle", "plain")

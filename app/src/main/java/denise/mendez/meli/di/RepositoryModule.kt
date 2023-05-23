@@ -11,6 +11,7 @@ import denise.mendez.data.repository.ItemsRepositoryImpl
 import denise.mendez.data.repository.SitesRepositoryImpl
 import denise.mendez.domain.repositories.ItemsRepository
 import denise.mendez.domain.repositories.SitesRepository
+import denise.mendez.domain.utils.Logger
 import javax.inject.Singleton
 
 
@@ -27,13 +28,15 @@ class RepositoryModule {
     @Singleton
     @Provides
     fun provideItemsRepository(
-        meliApi: MeliApi
-    ): ItemsRepository = ItemsRepositoryImpl(meliApi)
+        meliApi: MeliApi,
+        logger: Logger
+    ): ItemsRepository = ItemsRepositoryImpl(meliApi, logger)
 
     @Singleton
     @Provides
     fun provideSitesRepository(
-        meliApi: MeliApi
-    ): SitesRepository = SitesRepositoryImpl(meliApi)
+        meliApi: MeliApi,
+        logger: Logger
+    ): SitesRepository = SitesRepositoryImpl(meliApi,logger)
 
 }

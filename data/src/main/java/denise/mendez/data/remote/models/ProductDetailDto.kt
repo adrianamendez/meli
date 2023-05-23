@@ -13,7 +13,7 @@ data class ProductDetailDto(
     val idCategory: String? = EMPTY_STRING,
     val pictures: List<PictureDto>? = emptyList(),
     val permalink: String? = EMPTY_STRING,
-    val descriptionDto: ItemDescriptionDto = ItemDescriptionDto()
+    val description: ItemDescriptionDto = ItemDescriptionDto()
 ) {
 
     fun mapToDomain() = ProductDetails(
@@ -21,6 +21,6 @@ data class ProductDetailDto(
         title ?: EMPTY_STRING,
         pictures?.map { it.mapToDomain() } ?: emptyList(),
         permalink = permalink ?: EMPTY_STRING,
-        description = descriptionDto.mapToDomain()
+        description = description.mapToDomain()
     )
 }

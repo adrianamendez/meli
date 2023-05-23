@@ -37,6 +37,9 @@ android {
         jvmTarget = "11"
     }
 
+    packagingOptions {
+        resources.excludes.add("META-INF/*")
+    }
     kotlinter {
         ignoreFailures = false
         reporters = arrayOf("checkstyle", "plain")
@@ -59,7 +62,14 @@ dependencies {
     implementation(libs.retrofit2)
     implementation(libs.hilt.android)
     implementation(libs.datastore.preferences)
+
     implementation(libs.mockito.kotlin)
     implementation(libs.coroutines.test)
+    implementation(libs.junit)
+    implementation(libs.io.mockk)
+    implementation(libs.kotlinx.coroutines.test)
+    implementation(libs.androidx.test.core)
+    implementation(libs.mockito.core)
+    implementation(libs.androidx.test.runner)
 
 }
