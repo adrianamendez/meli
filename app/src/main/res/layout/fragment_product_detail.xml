@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+ <data>
+
+        <variable
+            name="viewModel"
+            type="denise.mendez.meli.modules.productdetail.viewmodel.ProductDetailViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:elevation="@dimen/toolbarElevation"
+            android:theme="?attr/actionBarTheme"
+            app:navigationIcon="?attr/homeAsUpIndicator"
+            app:title="@string/title_detail_product_fragment" />
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/toolbar"
+            android:layout_marginTop="@dimen/generic_margin_medium"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            tools:visibility="visible">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:padding="@dimen/generic_margin_small"
+                app:uiEmptyState="@{ viewModel.model  }">
+
+                <TextView
+                    android:id="@+id/condition_textView"
+                    itemCondition="@{ viewModel.itemProduct  }"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/generic_margin_x_small"
+                    android:textColor="@color/textLight"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                </TextView>
+
+                <TextView
+                    android:id="@+id/title_textview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/generic_margin_x_small"
+                    android:maxLines="4"
+                    android:text="@{viewModel.itemProduct.title}"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    app:layout_constraintTop_toBottomOf="@+id/condition_textView"
+                    tools:text="Naruto frog frog frog frog frog frog" />
+
+                <ImageView
+                    android:id="@+id/favourite_imageView"
+                    android:layout_width="@dimen/favourite_image_dimen"
+                    android:layout_height="@dimen/favourite_image_dimen"
+                    android:layout_marginTop="@dimen/generic_margin_medium"
+                    android:layout_marginEnd="@dimen/generic_margin_xx_small"
+                    android:src="@drawable/ic_favourite_empty"
+                    app:tint="@color/colorGray"
+                    app:layout_constraintEnd_toStartOf="@+id/favourite_textview"
+                    app:layout_constraintTop_toBottomOf="@+id/tab_indicator"
+                    tools:ignore="ContentDescription"  />
+
+                <TextView
+                    android:id="@+id/favourite_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/generic_margin_medium"
+                    android:text="@string/favourite_label"
+                    android:textColor="@color/colorGray"
+                    app:layout_constraintBottom_toBottomOf="@+id/favourite_imageView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tab_indicator"
+                    tools:visibility="visible" />
+
+                <TextView
+                    android:id="@+id/share_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/generic_margin_medium"
+                    android:layout_marginStart="@dimen/generic_margin_x_small"
+                    android:text="@string/share_label"
+                    android:textColor="@color/colorAccent"
+                    app:layout_constraintBottom_toBottomOf="@+id/favourite_imageView"
+                    app:layout_constraintStart_toEndOf="@+id/share_imageview"
+                    app:layout_constraintTop_toBottomOf="@+id/tab_indicator"
+                    app:layout_constraintVertical_bias="0.444"
+                    tools:visibility="visible" />
+
+                <ImageView
+                    android:id="@+id/share_imageview"
+                    android:layout_width="@dimen/favourite_image_dimen"
+                    android:layout_height="@dimen/favourite_image_dimen"
+                    android:layout_marginTop="@dimen/generic_margin_medium"
+                    android:src="@drawable/ic_share"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tab_indicator"
+                    app:tint="@color/colorAccent" />
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/view_pager_product_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/search_empty_image_size"
+                    android:clipChildren="false"
+                    android:clipToPadding="false"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/title_textview"
+                    app:loadViewPagerDetail="@{viewModel.productDetail.pictures}"/>
+                    <com.google.android.material.tabs.TabLayout
+                        android:id="@+id/tab_indicator"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        app:tabBackground="@drawable/tab_selector"
+                        app:tabGravity="center"
+                        android:visibility="visible"
+                        app:tabIndicatorHeight="@dimen/generic_none_dimen"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/view_pager_product_detail"/>
+
+                <TextView
+                    android:id="@+id/lbl_product_details_shipping"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/generic_margin_x_small"
+                    android:padding="@dimen/radius_x_small"
+                    android:textColor="@color/white"
+                    app:hasFreeShipping="@{viewModel.itemProduct.freeShipping}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/favourite_imageView"
+                    android:background="@drawable/bg_round_label"
+                    tools:text="Envío gratis" />
+
+                <TextView
+                    android:id="@+id/lbl_product_details_price"
+                    setPrice="@{viewModel.itemProduct.price}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/generic_margin_x_small"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_title_big"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/share_imageview"
+                    tools:text="$ 111,111" />
+
+                <TextView
+                    android:id="@+id/lbl_product_details_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/generic_margin_medium"
+                    android:text="@{viewModel.productDetail.description}"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_title"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/lbl_product_details_price"
+                    tools:text="Naruto frog frog frog frog frog" />
+
+                <ProgressBar
+                    android:id="@+id/progress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/ProgressBarStyle"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:uiLoading="@{ viewModel.model  }" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <include
+            android:id="@+id/include_no_internet_error_view"
+            layout="@layout/no_internet_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:layout_marginTop="?android:attr/actionBarSize"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            app:uiNoInternetState="@{ viewModel.model  }" />
+
+        <include
+            android:id="@+id/include_generic_error_view"
+            layout="@layout/generic_error"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="?android:attr/actionBarSize"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            app:uiErrorState="@{ viewModel.model  }" />
+
+    </RelativeLayout>
+
+</layout>

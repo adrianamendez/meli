@@ -13,8 +13,22 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:theme="@style/Theme.BasicWorkTest.NoActionBar"
         android:supportsRtl="true"
         tools:targetApi="31">
+        <activity
+            android:exported="true"
+            android:name=".modules.splash.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:exported="false"
+            android:name=".modules.main.MainActivity">
+        </activity>
     </application>
 
 </manifest>

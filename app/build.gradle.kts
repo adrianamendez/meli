@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.hilt.gradle)
     alias(libs.plugins.kotlinter)
+    alias(libs.plugins.androidx.navigation.args)
 }
 
 android {
@@ -42,6 +43,10 @@ android {
         jvmTarget = "11"
     }
 
+    buildFeatures {
+        dataBinding = true
+    }
+
 }
 
 dependencies {
@@ -61,6 +66,11 @@ dependencies {
     implementation(libs.retrofit2)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.lottie)
+    implementation(libs.androidx.material)
+    implementation(libs.androidx.navigation.fragment)
+    implementation(libs.androidx.navigation.ui.ktx)
+    implementation(libs.glide)
 
 }
 

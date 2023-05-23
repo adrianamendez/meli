@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="denise.mendez.meli.modules.search.entities.ProductItemModel" />
+
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/constraint_card_token_home"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/generic_margin_x_small"
+        android:paddingTop="@dimen/generic_margin_x_small"
+        android:paddingRight="@dimen/generic_margin_x_small">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_view_token_home"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="@dimen/generic_margin_x_small"
+        app:cardElevation="@dimen/card_elevation"
+        app:rippleColor="@color/colorPrimary"
+        android:background="@color/white"
+        app:strokeWidth="1dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:cardUseCompatPadding="true"
+        app:strokeColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/generic_margin_x_small"
+        android:layout_marginBottom="@dimen/generic_margin_xx_small">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/picture_imageview"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:contentDescription="@null"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_default="percent"
+            app:layout_constraintWidth_percent=".33"
+            app:shapeAppearanceOverlay="@style/roundedImageView"
+            app:loadImageUrl="@{item.thumbnail}"
+            tools:scaleType="centerCrop"
+            tools:src="@drawable/naturo_frog" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/generic_margin_small"
+            android:layout_marginEnd="@dimen/generic_margin_small"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/picture_imageview"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/item_condition_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:padding="@dimen/generic_margin_x_small"
+                android:textColor="@color/textLight"
+                android:textSize="@dimen/text_size_small"
+                itemCondition="@{item}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Envío con normalidad" />
+
+            <TextView
+                android:id="@+id/title_textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/generic_margin_x_small"
+                android:ellipsize="end"
+                android:maxLines="3"
+                android:text="@{item.title}"
+                android:textColor="@color/textLight"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/item_condition_textView"
+                tools:text="Naruto frog frog frog frog frog frog" />
+
+            <TextView
+                android:id="@+id/price_textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/generic_margin_x_small"
+                android:textColor="@color/textLight"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/title_textView"
+                app:setPrice="@{item.price}"
+                tools:text="$ 500.000" />
+
+            <TextView
+                android:id="@+id/freeshipping_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/generic_margin_xx_small"
+                android:ellipsize="end"
+                android:lines="1"
+                android:textColor="@color/colorGreen"
+                android:textSize="12sp"
+                app:hasFreeShipping="@{item.freeShipping}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/price_textView"
+                tools:text="Envío gratis" />
+
+            <ImageView
+                android:id="@+id/fulfillmentImageView"
+                hideIfFalse="@{item.hasFulfillment}"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginTop="@dimen/generic_margin_xx_small"
+                android:src="@drawable/ic_flash"
+                app:layout_constraintStart_toEndOf="@+id/freeshipping_textView"
+                app:layout_constraintTop_toBottomOf="@+id/price_textView" />
+
+            <TextView
+                android:id="@+id/fulfillment_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/generic_margin_xx_small"
+                android:ellipsize="end"
+                android:textColor="@color/colorGreen"
+                android:textSize="12sp"
+                app:fulFillmentLabel="@{item.hasFulfillment}"
+                app:layout_constraintStart_toEndOf="@+id/fulfillmentImageView"
+                app:layout_constraintTop_toBottomOf="@+id/price_textView"
+                tools:text="FULL" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+    </RelativeLayout>
+
+</layout>

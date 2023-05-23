@@ -15,6 +15,7 @@ import denise.mendez.data.network.ApiResponseCallAdapterFactory
 import denise.mendez.data.network.BASE_URL
 import denise.mendez.data.remote.apis.MeliApi
 import denise.mendez.data.storage.DataStorage
+import denise.mendez.meli.MeliApplication
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Protocol
@@ -46,6 +47,12 @@ class NetworkModule {
 
     // TODO REMOVE
     private val TOKEN_NOT_EMPTY = false
+
+    @Singleton
+    @Provides
+    fun provideApplication(@ApplicationContext app: Context): MeliApplication {
+        return app as MeliApplication
+    }
 
     @Singleton
     @Provides
@@ -82,14 +89,12 @@ class NetworkModule {
     @Singleton
     fun provideOkHttpClient(
         interceptor: Interceptor,
-        @Named("authInterceptor") authInterceptor: Interceptor,
+        networkInterceptor: Interceptor,
         @ApplicationContext context: Context
     ): OkHttpClient {
-        val networkInterceptor = provideNetworkInterceptor(context)
 
         val httpBuilder = OkHttpClient.Builder()
             .addInterceptor(interceptor)
-            .addInterceptor(authInterceptor)
             .addInterceptor(networkInterceptor)
             .connectTimeout(CONNECTION_TIMEOUT.toLong(), TimeUnit.SECONDS)
             .readTimeout(READ_TIMEOUT.toLong(), TimeUnit.SECONDS)
@@ -120,7 +125,9 @@ class NetworkModule {
         return activeNetwork != null && activeNetwork.isConnected
     }
 
-    private fun provideNetworkInterceptor(context: Context): Interceptor {
+    @Provides
+    @Singleton
+    fun provideNetworkInterceptor(context: Context): Interceptor {
         return Interceptor { chain ->
             if (!isInternetAvailable(context)) {
                 throw IOException("Please check your internet connection.")
@@ -129,13 +136,10 @@ class NetworkModule {
         }
     }
 
-    // TODO VALIDATE CACHE
-
     @Provides
     @Singleton
     fun providesMeli(
         retrofit: Retrofit
     ): MeliApi = retrofit.create(MeliApi::class.java)
-
 
 }

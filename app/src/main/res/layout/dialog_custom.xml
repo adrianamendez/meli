@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingStart="@dimen/generic_margin_small"
+        android:paddingEnd="@dimen/generic_margin_small">
+
+        <ImageView
+            android:id="@+id/image_view_dialog_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/generic_margin_x_medium"
+            android:contentDescription="@null"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_flash" />
+
+        <TextView
+            android:id="@+id/text_view_title"
+            android:textStyle="bold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/generic_margin_small"
+            android:paddingStart="@dimen/generic_margin_x_small"
+            android:paddingEnd="@dimen/generic_margin_x_small"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/image_view_dialog_icon"
+            tools:text="sorry not sorry" />
+
+        <TextView
+            android:id="@+id/text_view_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/generic_margin_x_small"
+            android:paddingStart="@dimen/generic_margin_x_small"
+            android:paddingEnd="@dimen/generic_margin_x_small"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_view_title"
+            tools:text="Sign in to send feedback and survey" />
+
+        <Button
+            android:id="@+id/button_negative"
+            style="@style/CustomDialog.Negative"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/generic_margin_small"
+            android:layout_marginBottom="@dimen/generic_margin_small"
+            android:textAllCaps="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/button_positive"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintWidth_max="wrap"
+            app:layout_constraintWidth_percent="0.45"
+            app:layout_constraintTop_toBottomOf="@id/text_view_message"
+            tools:text="Cancelar" />
+
+        <Button
+            android:id="@+id/button_positive"
+            style="@style/CustomDialog.Positive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/generic_margin_small"
+            android:layout_marginBottom="@dimen/generic_margin_small"
+            android:textAllCaps="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/button_negative"
+            app:layout_constraintTop_toBottomOf="@id/text_view_message"
+            app:layout_constraintWidth_max="wrap"
+            app:layout_constraintWidth_percent="0.45"
+            tools:text="Aceptar" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <data />
+</layout>
