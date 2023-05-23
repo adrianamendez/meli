@@ -1,6 +1,7 @@
 package denise.mendez.data.remote.models
 
 import com.squareup.moshi.Json
+import denise.mendez.domain.models.Product
 import denise.mendez.domain.utils.EMPTY_DOUBLE
 import denise.mendez.domain.utils.EMPTY_INT
 import denise.mendez.domain.utils.EMPTY_STRING
@@ -46,4 +47,19 @@ data class ProductDto(
     val tags: List<String>? = emptyList(),
     @Json(name = "catalog_listing")
     val catalogListing: Boolean? = false
-)
+){
+    enum class ItemStatusDto {
+        @field:Json(name = "new") NEW,
+        @field:Json(name = "used") USED,
+        @field:Json(name = "not_specified") NOT_SPECIFIED;
+
+        companion object {
+
+            fun mapToDomain(type: ItemStatusDto) = when(type) {
+                NEW -> Product.ItemStatus.NEW
+                USED -> Product.ItemStatus.USED
+                NOT_SPECIFIED -> Product.ItemStatus.NOT_SPECIFIED
+            }
+        }
+    }
+}

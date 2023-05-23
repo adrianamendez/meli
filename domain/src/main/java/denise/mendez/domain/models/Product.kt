@@ -27,4 +27,8 @@ data class Product(
     val catalogProductId: String,
     val tags: List<String>,
     val catalogListing: Boolean
-)
+){
+    enum class ItemStatus {
+        NEW, USED, NOT_SPECIFIED
+    }
+}

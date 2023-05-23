@@ -9,6 +9,7 @@ import com.example.basicworktest.denise.mendez.view.properties.itemViewBinding
 import denise.mendez.meli.R
 import denise.mendez.meli.databinding.ItemProductBinding
 import denise.mendez.meli.modules.search.entities.ProductItemModel
+import denise.mendez.meli.utils.setSingleClickListener
 
 class SearchItemView(
     override val context: Context,
@@ -27,16 +28,16 @@ class SearchItemView(
                 MATCH_PARENT,
                 WRAP_CONTENT
             )
-          /*  binding.cardViewTokenHome.setSingleClickListener {
+            binding.cardViewTokenHome.setSingleClickListener {
                 onClickListener(data)
-            }*/
+            }
         }
     }
 
     override fun bind(item: ProductItemModel) {
         data = item
         with(binding) {
-          //  this.item = item
+            this.item = item
             executePendingBindings()
         }
     }

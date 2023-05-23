@@ -14,15 +14,22 @@ data class ProductItemModel(
     val thumbnail: String = EMPTY_STRING,
     val freeShipping: Boolean = false,
     val hasFulfillment: Boolean = false,
-    val hasShippingGuaranteed: Boolean = false
+    val hasShippingGuaranteed: Boolean = false,
+    val condition: String = EMPTY_STRING
 ) : Serializable {
 
     companion object {
         fun mapFromDomain(product: Product) = ProductItemModel(
-            product.id,
-            product.title,
-            //  product.soldQuantity,
-            //  product.condition
+            id = product.id,
+            title = product.title,
+            price = product.price,
+            quantity = product.availableQuantity,
+            soldQuantity = product.soldQuantity,
+            thumbnail = product.thumbnail,
+            freeShipping = product.shipping.freeShipping,
+            hasFulfillment = product.shipping.storePickUp,
+            hasShippingGuaranteed = product.shipping.logisticType == "fulfillment",
+            condition = product.condition
         )
     }
 }

@@ -29,7 +29,7 @@ class ProductDetailItemView(
 
     override fun bind(item: PictureModel) {
         data = item
-        //  binding.model = item
+        binding.model = item
         binding.executePendingBindings()
     }
 }
