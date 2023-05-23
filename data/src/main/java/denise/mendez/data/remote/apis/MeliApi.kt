@@ -10,7 +10,7 @@ import retrofit2.http.Query
 
 interface MeliApi {
     @GET("sites/{idSite}/search")
-    fun searchProducts(
+    suspend fun searchProducts(
         @Path("idSite") idSite: String,
         @Query("q") query: String,
         @Query("offset") offset: Int,
