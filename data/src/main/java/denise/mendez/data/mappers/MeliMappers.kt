@@ -26,6 +26,7 @@ import denise.mendez.domain.models.Shipping
 import denise.mendez.domain.models.State
 import denise.mendez.domain.utils.EMPTY_DOUBLE
 import denise.mendez.domain.utils.EMPTY_INT
+import denise.mendez.domain.utils.EMPTY_LONG
 import denise.mendez.domain.utils.EMPTY_STRING
 
 object SearchResponseMapper {
@@ -55,7 +56,7 @@ object ResultMapper {
             siteId = from.siteId ?: EMPTY_STRING,
             title = from.title ?: EMPTY_STRING,
             seller = SellerMapper.map(from.seller ?: SellerDto()),
-            price = from.price ?: EMPTY_INT,
+            price = from.price ?: EMPTY_DOUBLE,
             currencyId = from.currencyId ?: EMPTY_STRING,
             availableQuantity = from.availableQuantity ?: EMPTY_INT,
             soldQuantity = from.soldQuantity ?: EMPTY_INT,
@@ -71,7 +72,7 @@ object ResultMapper {
             shipping = ShippingMapper.map(from.shipping ?: ShippingDto()),
             sellerAddress = SellerAddressMapper.map(from.sellerAddress ?: SellerAddressDto()),
             attributes = from.attributes?.map { AttributeMapper.map(it) } ?: listOf(),
-            originalPrice = from.originalPrice?.toDouble() ?: EMPTY_DOUBLE,
+            originalPrice = from.originalPrice ?: EMPTY_DOUBLE,
             categoryId = from.categoryId ?: EMPTY_STRING,
             officialStoreId = from.officialStoreId ?: EMPTY_INT,
             catalogProductId = from.catalogProductId ?: EMPTY_STRING,
@@ -166,7 +167,7 @@ object AttributeMapper {
             valueStruct = from.valueStruct,
             attributeGroupId = from.attributeGroupId ?: EMPTY_STRING,
             attributeGroupName = from.attributeGroupName ?: EMPTY_STRING,
-            source = from.source ?: EMPTY_INT,
+            source = from.source ?: EMPTY_LONG,
             id = from.id ?: EMPTY_STRING
         )
 }

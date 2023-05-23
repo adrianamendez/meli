@@ -2,6 +2,7 @@ package denise.mendez.domain.utils
 
 const val EMPTY_STRING = ""
 const val EMPTY_INT = 0
+const val EMPTY_LONG = 0L
 const val EMPTY_DOUBLE = 0.0
 const val LOGISTIC_TYPE = "fulfillment"
 const val SHIPPING_GUARANTEED = "shipping_guaranteed"

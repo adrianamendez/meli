@@ -1,6 +1,7 @@
 package denise.mendez.data.remote.models
 
 import com.squareup.moshi.Json
+import denise.mendez.domain.utils.EMPTY_DOUBLE
 import denise.mendez.domain.utils.EMPTY_INT
 import denise.mendez.domain.utils.EMPTY_STRING
 
@@ -10,7 +11,7 @@ data class ProductDto(
     val siteId: String = EMPTY_STRING,
     val title: String? = EMPTY_STRING,
     val seller: SellerDto? = null,
-    val price: Int? = EMPTY_INT,
+    val price: Double? = EMPTY_DOUBLE,
     @Json(name = "currency_id")
     val currencyId: String? = EMPTY_STRING,
     @Json(name = "available_quantity")
@@ -35,7 +36,7 @@ data class ProductDto(
     val sellerAddress: SellerAddressDto? = SellerAddressDto(),
     val attributes: List<AttributeDto>? = emptyList(),
     @Json(name = "original_price")
-    val originalPrice: Int? = EMPTY_INT,
+    val originalPrice: Double? = EMPTY_DOUBLE,
     @Json(name = "category_id")
     val categoryId: String? = EMPTY_STRING,
     @Json(name = "official_store_id")

@@ -1,5 +1,6 @@
 package denise.mendez.data.repository
 
+import android.util.Log
 import denise.mendez.data.mappers.SuccessItemProductSearchedMapper
 import denise.mendez.data.network.SITE_ID
 import denise.mendez.data.network.map
@@ -10,6 +11,7 @@ import denise.mendez.data.remote.apis.MeliApi
 import denise.mendez.domain.ResourceState
 import denise.mendez.domain.models.Product
 import denise.mendez.domain.repositories.SitesRepository
+import denise.mendez.domain.utils.REPOSITORY_SITES
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -28,11 +30,14 @@ class SitesRepositoryImpl(private val meliApi: MeliApi) : SitesRepository {
             val itemDescription = map(SuccessItemProductSearchedMapper)
             if (itemDescription == null) {
                 emit(ResourceState.Error(message = "An error occurred while mapping SuccessItemDescriptionMapper"))
+                Log.d(REPOSITORY_SITES, "An error occurred while mapping SuccessItemDescriptionMapper returns Null")
             } else {
                 emit(ResourceState.Success(itemDescription))
+                Log.d(REPOSITORY_SITES, "Success")
             }
         }.suspendOnFailure {
             emit(ResourceState.Error(message = message()))
+            Log.d(REPOSITORY_SITES, message())
         }
     }.flowOn(Dispatchers.Default)
 }

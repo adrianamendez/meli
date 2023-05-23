@@ -87,8 +87,14 @@ class SearchViewModel @Inject constructor(
                                     isLoading = false
                                 )
                             }
-                            is ResourceState.Error -> _state.value.copy(error = result.message)
-                            is ResourceState.Loading -> _state.value.copy(isLoading = true)
+                            is ResourceState.Error -> {
+                                showErrorUiModel()
+                                _state.value.copy(error = result.message)
+                            }
+                            is ResourceState.Loading -> {
+                                showEmptyStateUiModel()
+                                _state.value.copy(isLoading = true)
+                            }
                         }
 
 

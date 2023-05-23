@@ -5,7 +5,7 @@ data class Product(
     val siteId: String,
     val title: String,
     val seller: Seller,
-    val price: Int,
+    val price: Double,
     val currencyId: String,
     val availableQuantity: Int,
     val soldQuantity: Int,

@@ -2,6 +2,7 @@ package denise.mendez.data.remote.models
 
 import com.squareup.moshi.Json
 import denise.mendez.domain.utils.EMPTY_INT
+import denise.mendez.domain.utils.EMPTY_LONG
 import denise.mendez.domain.utils.EMPTY_STRING
 
 data class AttributeDto(
@@ -16,6 +17,6 @@ data class AttributeDto(
     val attributeGroupId: String? = EMPTY_STRING,
     @Json(name = "attribute_group_name")
     val attributeGroupName: String? = EMPTY_STRING,
-    val source: Int? = EMPTY_INT,
+    val source: Long? = EMPTY_LONG,
     val id: String? = EMPTY_STRING
 )
