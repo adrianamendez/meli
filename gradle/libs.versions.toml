@@ -34,6 +34,10 @@ mockito= "3.4.0"
 coreTesting = "2.2.0"
 mockitokotlin2 = "2.1.0"
 reflect = "1.3.41"
+espressoCore = "3.4.0"
+testRules = "1.4.0"
+jUnitKtx = "1.1.3"
+fragmentTesting = "1.3.6"
 
 [libraries]
 
@@ -76,6 +80,10 @@ mockito-inline = {module = "org.mockito:mockito-inline", version.ref = "mockitoC
 core-testing = {module = "androidx.arch.core:core-testing", version.ref = "coreTesting"}
 kotlin-reflect = {module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "reflect"}
 mockitokotlin2 = {module = "com.nhaarman.mockitokotlin2:mockito-kotlin", version.ref = "mockitokotlin2"}
+espresso-core = {module = "androidx.test.espresso:espresso-core", version.ref = "espressoCore"}
+androidx-test-rules = {module = "androidx.test:rules", version.ref = "testRules"}
+test-ext-junit = {module = "androidx.test.ext:junit", version.ref = "jUnitKtx"}
+fragment-testing = {module = "androidx.fragment:fragment-testing", version.ref = "fragmentTesting"}
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }

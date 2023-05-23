@@ -87,6 +87,10 @@ dependencies {
     implementation(libs.core.testing)
     implementation(libs.mockitokotlin2)
     implementation(libs.kotlin.reflect)
+    implementation(libs.espresso.core)
+    implementation(libs.androidx.test.rules)
+    implementation(libs.test.ext.junit)
+    implementation(libs.fragment.testing)
 
 }
 
